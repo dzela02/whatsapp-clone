@@ -10,7 +10,7 @@ const firebaseConfig = {
   measurementId: "G-YJ9DJDFC92",
 };
 
-const app = !firebase.app.length
+const app = !firebase.apps.length
   ? firebase.initializeApp(firebaseConfig)
   : firebase.app();
 

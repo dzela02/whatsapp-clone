@@ -1,14 +1,25 @@
-import { Avatar, IconButton } from "@material-ui/core";
+import { Avatar, createChainedFunction, IconButton } from "@material-ui/core";
 import styled from "styled-components";
 import ChatIcon from "@material-ui/icons/Chat";
 import MoreVert from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
 import Button from "@material-ui/core/Button";
+import * as EmailValidator from "email-validator";
+import auth from "firebase";
 function Sidebar() {
+  const createChat = () => {
+    const input = prompt(
+      "Unesite mail osobe sa kojom bi ste zeleli da se cujete"
+    );
+    if (!input) return null;
+
+    if (EmailValidator.validate(input)) {
+    }
+  };
   return (
     <Container>
       <Header>
-        <UserAvatar />
+        <UserAvatar onClick={() => auth.signOut()} />
         <IconsContainer>
           <IconButton>
             <ChatIcon />
@@ -22,9 +33,7 @@ function Sidebar() {
         <SearchIcon />
         <SearchInput placeholder="Pretrazi caskanja" />
       </Search>
-      <SidebarButton>Pokreni novo caskanje</SidebarButton>
-
-      {/* Lista govnara sa kojima se dopisujes*/}
+      <SidebarButton onClick={createChat}>Pokreni novo caskanje</SidebarButton>
     </Container>
   );
 }
